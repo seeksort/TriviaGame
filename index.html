@@ -8,58 +8,65 @@
 	<!--Bootstrap, if desired-->
 <!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 	<!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Passion+One|Signika" rel="stylesheet">
 	<!--Regular Style Sheet-->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-	<div class="quiz-content">
-		<h1>Geography Trivia</h1>
-		<div id="intro">
-			<p>Welcome to Geography Trivia!</p>
-			<p>You will have 45 seconds to answer each question. Good Luck!</p>
-			<button id="start">Start!</button>
-		</div>
-		<div id="question-content">
-			<p id="timer"></p>
-			<p id="current-question"></p>
-			<ul class="answer-options">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-		<!--Might leave off, including for mockup purposes-->
-		<div id="answer-page">
-			<p id="timer"></p>
-			<p id="answer-eval"></p>
-			<p id="correct-answer-parent">The correct answer was: <span id="correct-answer"></span></p>
-			<img src="#">
-		</div>
-		<div id="game-over">
-			<p id="timer"></p>
-			<p>Quiz over! How did you do?</p>
-			<table>
-				<tr>
-					<td>Correct:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Incorrect:</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Unanswered: </td>
-					<td></td>
-				</tr>
-			</table>
-			<button id="restart">Start Over</button>
-		</div>
+<div class="background-img"></div>
+	<div class="main-content">
+		<div class="quiz-content">
+			<h1>Geography Trivia</h1>
+			<div id="intro">
+				<p>Welcome to Geography Trivia!</p>
+				<p>You will have 45 seconds to answer each question. Good Luck!</p>
+				<button id="start">Start!</button>
+			</div>
+			<div id="question-content">
+				<p id="timer"></p>
+				<p id="current-question"></p>
+				<ul class="answer-options">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<!--Might leave off, including for mockup purposes-->
+			<div id="answer-page">
+				<p id="timer"></p>
+				<p id="answer-eval"></p>
+				<p id="correct-answer-parent">The correct answer was: <span id="correct-answer"></span></p>
+				<img src="#">
+			</div>
+			<div id="game-over">
+				<p id="timer"></p>
+				<p>Quiz over! How did you do?</p>
+				<table>
+					<tbody>
+						<tr>
+							<td>Correct:</td>
+							<td id="correct-num">0</td>
+						</tr>
+						<tr>
+							<td>Incorrect:</td>
+							<td id="incorrect-num">0</td>
+						</tr>
+						<tr>
+							<td>Unanswered: </td>
+							<td id="unanswered-num">0</td>
+						</tr>						
+					</tbody>
+				</table>
+				<button id="restart">Start Over</button>
+			</div>
+		</div>		
 	</div>
+	
 
 	<!--jQuery-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<!--JavaScript-->
-	<script type="text/javascript" src="assets/javascript/game.js"></script>
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 </html>
