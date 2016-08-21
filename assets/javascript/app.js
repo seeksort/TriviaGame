@@ -55,4 +55,80 @@ var questionBank = {
 		answerInd: 0,
 		picture: "#"
 	}
+};
+var currentQuestion = "q1";
+var currentCorrectAnsInd = questionBank[currentQuestion].answerInd;
+var currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorrectAnsInd];
+var questionAnswered = false;
+var answerCorrect;
+var userChoice = "";
+var questionTimer = 5;
+var counter;
+
+function nextPage() {
+	$("#start").on("click", function() {
+		$("#start").prop("disabled",true); // was getting a funky error, this fixes it
+		$("#intro").toggle();
+		$("#question-content").toggle();
+		timer();
+	});
+	$("li").on("click", null, this, evaluateResponse)
+};
+function evaluateResponse() {
+	userChoice = $(this).html();
+	console.log(this.id)
+	console.log(userChoice);
+	if (userChoice === currentCorrectAns) {
+		answerCorrect = true;
+		console.log("yes")
+	} 
+	else {
+		answerCorrect = false;
+		console.log("no")
+	}
+	answerPage()
 }
+function answerPage() {
+	$("#question-content").toggle();
+	$("#answer-page").toggle();
+	if (answerCorrect === true) {
+		$("#answer-eval").html("That's correct!");
+		$("#correct-answer-parent").html("<span id='correct-answer'></span>")
+	} else if (answerCorrect === false) {
+		$("#answer-eval").html("Sorry, that's incorrect.");
+		$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>")
+	} else {
+		$("#answer-eval").html("You ran out of time!");
+		$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>")
+	}
+}
+function timer() {
+	counter = setInterval(decrement, 1000);
+}
+function decrement() {
+	questionTimer--;
+	$("#timer").html(questionTimer);
+	if (questionTimer < 0) {
+		clearInterval(counter);
+		answerPage();
+	}
+}
+
+$(document).ready( function(){
+	nextPage()
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

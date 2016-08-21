@@ -7,7 +7,7 @@ h1 {
 	font-family: 'Passion One', cursive;
 	font-size: 3em;
 	color: #fff;
-	margin: 12px 0;
+	margin: 16px 0;
 	text-shadow:
 	    0 1px 0px #378ab4,
 	    1px 0 0px #5dabcd,
@@ -26,11 +26,11 @@ h1 {
 	    7px 8px 0px #378ab4,
 	    8px 7px 0px #5dabcd;
 }
-p, table {
-	font-family: 'Signika', sans-serif;
+p, table, li {
+	font-family: 'Libre Franklin', sans-serif;
 	font-size: 1.25em;
 	color: #fff;
-	margin: 4px;
+	margin: 10px;
 }
 .main-content {
 	float: left;
@@ -38,7 +38,7 @@ p, table {
 	width: 500px;
 	height: 100%;
 	background-color: grey;
-	background: -webkit-linear-gradient(left, #801515, #A690A3);
+	background: -webkit-linear-gradient(top, #960909, #E56D6D);
 	border: none;
 }
 .quiz-content {
@@ -58,13 +58,38 @@ p, table {
     background-repeat: no-repeat;
     border: none;
 }
+button {
+	margin: 4px;
+	width: 100px;
+	height: 40px;
+	font-family: 'Libre Franklin', sans-serif;
+	font-size: 1.25em;
+	color: #801515;
+	background-color: #FFAAAA;
+	border: solid;
+	border-radius: 4px;
+	border-color: #FFAAAA;
+}
+button:hover {
+	color: #FFAAAA;
+	background-color: #801515;
+	border-color: #801515;
+}
+button:active {
+	color: #FFAAAA;
+	background-color: #6A0000;
+	border-color: #6A0000;
+}
 /*
 ================
 Question Pages
 ================
 */
-
-
+#question-content,
+#answer-page,
+#game-over {
+	display: none;
+}
 
 table {
 	text-align: left;
