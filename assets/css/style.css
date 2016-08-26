@@ -31,6 +31,7 @@ p, table, li {
 	font-size: 1.25em;
 	color: #fff;
 	margin: 10px;
+	padding: 4px;
 }
 .main-content {
 	float: left;
@@ -90,7 +91,24 @@ Question Pages
 #game-over {
 	display: none;
 }
-
+li {
+	height: 1.5em;
+	line-height: 1.5em;
+	border: solid;
+	border-width: 1px;
+	border-color: #801515;
+	border-radius: 10px;
+}
+li:hover {
+	color: #FFAAAA;
+	background-color: #801515;
+	border-color: #801515;
+}
+button:active {
+	color: #FFAAAA;
+	background-color: #6A0000;
+	border-color: #6A0000;
+}
 table {
 	text-align: left;
 	width: 200px;

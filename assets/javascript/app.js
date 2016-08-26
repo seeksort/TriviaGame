@@ -11,7 +11,7 @@ var questionBank = {
 		question: "This is the highest mountain in the Southern Hemisphere.",
 		answerChoices: ["K2", "Aconcagua", "Vinson Massif", "Mauna Kea"],
 		answerInd: 1,
-		picture: "#"
+		picture: "assets/images/Aconcagua.jpg"
 	},
 	q3:
 	{
@@ -57,6 +57,7 @@ var questionBank = {
 	}
 };
 var currentQuestion = "q1";
+var questionCount = 1;
 var currentCorrectAnsInd = questionBank[currentQuestion].answerInd;
 var currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorrectAnsInd];
 var questionDone = false;
@@ -66,8 +67,16 @@ var questionTimer = 4;
 var answerTimer = 3;
 var defaultQuestionTimer = 4;
 var defaultAnswerTimer = 3;
+var answerChoiceCount = 4;
 var quesCounter;
 var ansCounter;
+
+
+/*
+======================== 
+Question Page Functions 
+========================
+*/
 
 function nextPage() {
 	$("#start").on("click", function() {
@@ -75,80 +84,123 @@ function nextPage() {
 		$("#intro").toggle();
 		$("#question-content").toggle();
 		questionPageTimer();
+		evaluateResponse();
 	});
-	if (questionDone === false) {
-		$("li").on("click", null, this, evaluateResponse)
-	}
-};
-function evaluateResponse() {
-	userChoice = $(this).html();
-	console.log(this.id)
-	console.log(userChoice);
-	if (userChoice === currentCorrectAns) {
-		answerCorrect = true;
-		console.log("yes")
-	} 
-	else {
-		answerCorrect = false;
-		console.log("no")
-	}
-	questionDone = true;
-	answerPage()
 }
-function answerPage() {
-	$("#question-content").toggle();
-	$(".ans-option").prop("disabled",true);
-	$("#answer-page").toggle();
-	changePicture();
-	if (answerCorrect === true) {
-		$("#answer-eval").html("That's correct!");
-		$("#correct-answer-parent").html("<span id='correct-answer'></span>");
-	} 
-	else if (answerCorrect === false) {
-		$("#answer-eval").html("Sorry, that's incorrect.");
-		$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>");
-	} 
-	else {
-		$("#answer-eval").html("You ran out of time!");
-		$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>");
+function evaluateResponse() {
+	if (questionDone === false) {
+		$("li").on("click", null, this, function(){
+			window.clearInterval(quesCounter);
+			userChoice = $(this).html();
+			console.log(this.id)
+			console.log(userChoice);
+			if (userChoice === currentCorrectAns) {
+				answerCorrect = true;
+				console.log("yes, correct response")
+			} 
+			else {
+				answerCorrect = false;
+				console.log("no, wrong response")
+			}
+			questionTimer = defaultQuestionTimer;
+			questionDone = true;
+			answerPage();
+		})
 	}
-	answerPageTimer();
 }
 function questionPageTimer() {
+	$("#qTimer").html(questionTimer);
 	quesCounter = setInterval(function () {
 		questionTimer--;
-		$("#timer").html(questionTimer);
-		if (questionTimer < 0) {
-	 		questionTimer = defaultQuestionTimer;
+		$("#qTimer").html(questionTimer);
+		if (questionTimer <= 0) {
 	 		questionDone = true;
+	 		answerCorrect = "";
 	 		clearInterval(quesCounter);
 	 		answerPage();
-	 		console.log("question timer: " + questionTimer)
  		};
 	}, 1000);
-}
-function answerPageTimer() {
-	ansCounter = setInterval(function () {
-		answerTimer--;
-		$("#timer").html(answerTimer);
-		if (answerTimer < 0) {		
-	 		answerTimer = defaultAnswerTimer;
-	 		questionDone = false;
-	 		console.log("done");
-	 		clearInterval(ansCounter);
- 		};
-	}, 1000);
-}
-//TODO - the timers keep looping back to the answer page...
-function changePicture() {
-	//TODO
-	// adjust for other images
-	$(".background-img").css("background-image", 'url("assets/images/PI.jpg")')
-	console.log("this happened")
 }
 
-$(document).ready( function(){
-	nextPage()
+/*
+======================== 
+Answer Page Functions 
+========================
+*/
+function answerPage() {
+	if (questionDone === true) {
+		$("#question-content").toggle();
+		$(".ans-option").prop("disabled",true);
+		$("#answer-page").toggle();
+		changePicture();
+		if (answerCorrect === true) {
+			$("#answer-eval").html("That's correct!");
+			$("#correct-answer-parent").html("<span id='correct-answer'></span>");
+		} 
+		else if (answerCorrect === false) {
+			$("#answer-eval").html("Sorry, that's incorrect.");
+			$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>");
+		} 
+		else {
+			$("#answer-eval").html("You ran out of time!");
+			$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>");
+		}
+		answerPageTimer();	
+	}
+}
+function changePicture() {
+	$(".background-img").css("background-image", 'url('+ questionBank[currentQuestion].picture) + ")";
+	questionDone = false;
+	console.log("this happened");
+}
+function answerPageTimer() {
+	$("#aTimer").html(defaultAnswerTimer);
+	ansCounter = setInterval(function () {
+		answerTimer--;
+		$("#aTimer").html(answerTimer);
+		if (answerTimer <= 0) {		 		
+	 		questionDone = false;
+	 		console.log("answer page timer done");
+	 		clearInterval(ansCounter);
+	 		questionCount++;
+	 		changeQuestion();
+ 		};
+	}, 1000);
+}
+
+
+function changeQuestion() {
+	if (questionCount <= 8) {
+		answerTimer = defaultAnswerTimer;
+		questionTimer = defaultQuestionTimer;
+		questionDone = false;
+		answerCorrect = "";
+		userChoice = "";
+
+		$("#answer-page").toggle();
+		$("#question-content").toggle();
+		currentQuestion = "q" + questionCount;
+		$("#current-question").html(questionBank[currentQuestion].question);
+		console.log("current question: " + questionBank[currentQuestion].question);
+		currentCorrectAnsInd = questionBank[currentQuestion].answerInd;
+		currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorrectAnsInd];
+		$(".ans-option").prop("disabled", false);
+		var options = $(".ans-option");
+
+		for (i = 0; i < answerChoiceCount; i++) {
+			var ansId = "#a" + (i+1).toString();
+			console.log(ansId);
+			console.log(questionBank[currentQuestion].answerChoices[i]);
+			$(ansId).html(questionBank[currentQuestion].answerChoices[i]);
+		}
+	}
+	console.log("changeQuestion is done");
+	questionPageTimer();
+	evaluateResponse();
+}
+
+$(document).ready(function(){
+	nextPage();
 });
 
 
