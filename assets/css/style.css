@@ -33,10 +33,20 @@ p, table, li {
 	margin: 10px;
 	padding: 4px;
 }
-.main-content {
-	float: left;
+.background-img {
 	position: absolute;
-	width: 500px;
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/norway.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+}
+.main-content {
+	left: 0px;
+	position: fixed;
+	opacity: 0.9;
+	width: 400px;
 	height: 100%;
 	background-color: grey;
 	background: -webkit-linear-gradient(top, #960909, #E56D6D);
@@ -45,23 +55,14 @@ p, table, li {
 .quiz-content {
 	position: relative;
 	top: 25%;
-	width: 450px;
+	width: 350px;
 	margin: auto;
 	text-align: center; 
 }
-.background-img {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	margin-left: 100px;
-	background-image: url("../images/norway.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: none;
-}
+
 button {
 	margin: 4px;
-	width: 100px;
+	width: 150px;
 	height: 40px;
 	font-family: 'Libre Franklin', sans-serif;
 	font-size: 1.25em;
@@ -135,6 +136,7 @@ Media Queries
 		background-size: right;
 	}
 	.main-content {
+		opacity: 1;
 		position: absolute;
 		top: 25%;
 		width: 100%;
@@ -153,7 +155,6 @@ Media Queries
 		width: 100%;
 		height: 50%;
 		top: -150px;
-		margin-left: 0px;
 		background-image: url("../images/norway.jpg");
 	    background-size: cover;
 	    background-repeat: no-repeat;
@@ -162,6 +163,7 @@ Media Queries
 }
 @media screen and (min-width: 640px) and (max-width: 768px) {
 	.main-content {
+		opacity: 1;
 		position: absolute;
 		top: 25%;
 		width: 100%;
@@ -180,7 +182,6 @@ Media Queries
 		width: 100%;
 		height: 50%;
 		top: -125px;
-		margin-left: 0px;
 		background-image: url("../images/norway.jpg");
 	    background-size: cover;
 	    background-repeat: no-repeat;
@@ -190,14 +191,14 @@ Media Queries
 @media screen and (min-width: 768px) and (max-width: 980px) {
 	.main-content {
 		position: absolute;
-		width: 400px;
+		width: 300px;
 		height: 100%;
 		background-color: grey;
 	}
 	.quiz-content {
 		position: relative;
 		top: 25%;
-		width: 350px;
+		width: 85%;
 		margin: auto;
 		text-align: center; 
 	}
@@ -205,7 +206,6 @@ Media Queries
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		margin-left: 100px;
 		background-image: url("../images/norway.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
