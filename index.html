@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title></title>
+	<title>Geography Trivia</title>
 	<!--CSS Reset-->
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<!--Google Fonts-->
@@ -21,37 +21,35 @@
 				<button id="start">Start!</button>
 			</div>
 			<div id="question-content">
-				<p id="timer-parent">Time Remaining: <span id="qTimer">4</span> seconds</p>
-				<p id="current-question">This country is made up of approximately 7,600 islands.</p>
+				<p class="timer-parent">Time Remaining: <span id="qTimer">45</span> seconds</p>
+				<p id="current-question">Which of these is the driest hot desert?</p>
 				<ul class="answer-options">
-					<li class="q1-ans ans-option" id="a1">The Philippines</li>
-					<li class="q1-ans ans-option" id="a2">Indonesia</li>
-					<li class="q1-ans ans-option" id="a3">Singapore</li>
-					<li class="q1-ans ans-option" id="a4">Malaysia</li>
+					<li class="q1-ans ans-option" id="a1">Gobi Desert</li>
+					<li class="q1-ans ans-option" id="a2">Sahara Desert</li>
+					<li class="q1-ans ans-option" id="a3">Atacama Desert</li>
+					<li class="q1-ans ans-option" id="a4">Gibson Desert</li>
 				</ul>
 			</div>
-			<!--Might leave off, including for mockup purposes-->
 			<div id="answer-page">
-				<p id="timer-parent">Next question in <span id="aTimer">3</span> seconds...</p>
+				<p class="timer-parent">Next question in <span id="aTimer">8</span> seconds...</p>
 				<p id="answer-eval"></p>
 				<p id="correct-answer-parent">The correct answer was: <span id="correct-answer"></span></p>
 			</div>
 			<div id="game-over">
-				<p id="timer-parent">Time Remaining: <span id="timer"></span> seconds</p>
 				<p>Quiz over! How did you do?</p>
 				<table>
 					<tbody>
 						<tr>
 							<td>Correct:</td>
-							<td id="correct-num">0</td>
+							<td class="stats" id="correct-num">0</td>
 						</tr>
 						<tr>
 							<td>Incorrect:</td>
-							<td id="incorrect-num">0</td>
+							<td class="stats" id="incorrect-num">0</td>
 						</tr>
 						<tr>
 							<td>Unanswered: </td>
-							<td id="unanswered-num">0</td>
+							<td class="stats" id="unanswered-num">0</td>
 						</tr>						
 					</tbody>
 				</table>

@@ -37,7 +37,7 @@ p, table, li {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-image: url("../images/norway.jpg");
+	background-image: url("../images/deathvalley.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
@@ -110,21 +110,23 @@ button:active {
 	background-color: #6A0000;
 	border-color: #6A0000;
 }
+/*
+================
+Game Over Page
+================
+*/
 table {
 	text-align: left;
 	width: 200px;
 	margin-left: auto;
 	margin-right: auto;
 }
-/*
-================
-Game Over Page
-================
-*/
-
-
-
-
+.stats {
+	text-align: center;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
 /*
 ================
 Media Queries
@@ -132,7 +134,7 @@ Media Queries
 */
 @media screen and (max-width: 640px) {
 	body {
-		background-image: url("../images/norway.jpg");
+		background-image: url("../images/deathvalley.jpg");
 		background-size: right;
 	}
 	.main-content {
@@ -155,7 +157,7 @@ Media Queries
 		width: 100%;
 		height: 50%;
 		top: -150px;
-		background-image: url("../images/norway.jpg");
+		background-image: url("../images/deathvalley.jpg");
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    border: none;
@@ -182,7 +184,7 @@ Media Queries
 		width: 100%;
 		height: 50%;
 		top: -125px;
-		background-image: url("../images/norway.jpg");
+		background-image: url("../images/deathvalley.jpg");
 	    background-size: cover;
 	    background-repeat: no-repeat;
 	    border: none;
@@ -206,7 +208,7 @@ Media Queries
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background-image: url("../images/norway.jpg");
+		background-image: url("../images/deathvalley.jpg");
 		background-size: cover;
 		background-repeat: no-repeat;
 		border: none;

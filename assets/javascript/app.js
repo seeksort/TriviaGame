@@ -1,10 +1,10 @@
 var questionBank = {
 	q1: 
 	{
-		question: "This country is made up of approximately 7,600 islands.",
-		answerChoices: ["The Philippines", "Indonesia", "Singapore", "Malaysia"],
-		answerInd: 0,
-		picture: "assets/images/PI.jpg"
+		question: "Which of these is the driest hot desert?",
+		answerChoices: ["Gobi Desert", "Sahara Desert", "Atacama Desert", "Gibson Desert"],
+		answerInd: 2,
+		picture: "assets/images/atacama.jpg"
 	},
 	q2:
 	{ 
@@ -29,31 +29,31 @@ var questionBank = {
 	},
 	q5:
 	{
-		question: "Which of these is the driest hot desert?",
-		answerChoices: ["Gobi Desert", "Sahara Desert", "Atacama Desert", "Gibson Desert"],
-		answerInd: 2,
-		picture: "assets/images/atacama.jpg"
+		question: "What is the world's largest island?",
+		answerChoices: ["Greenland", "Australia", "Madagascar", "Indonesia"],
+		answerInd: 0,
+		picture: "assets/images/greenland.jpg"
 	},
 	q6:
 	{
 		question: "What is a ring-shaped coral reef called?",
 		answerChoices: ["Fringing Reef", "Barrier Reef", "Cay", "Atoll"],
 		answerInd: 3,
-		picture: "assets/images/#"
+		picture: "assets/images/atoll.jpg"
 	},
 	q7:
 	{
 		question: "Which of these animals is NOT found in Antarctica?",
 		answerChoices: ["Adelie Penguin", "Weddell Seal", "Gentoo Penguin", "Black-tailed Gull"],
 		answerInd: 3,
-		picture: "assets/images/#"
+		picture: "assets/images/antarctica.jpg"
 	},
 	q8:
 	{
-		question: "What is the world's largest island?",
-		answerChoices: ["Greenland", "Australia", "Madagascar", "Indonesia"],
+		question: "This country is made up of approximately 7,600 islands.",
+		answerChoices: ["The Philippines", "Maldives", "Singapore", "Malaysia"],
 		answerInd: 0,
-		picture: "assets/images/#"
+		picture: "assets/images/PI.jpg"
 	}
 };
 var gameActive = true;
@@ -65,10 +65,10 @@ var currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorre
 var questionDone = false;
 var answerCorrect = "";
 var userChoice = "";
-var questionTimer = 4;
-var answerTimer = 3;
-var defaultQuestionTimer = 4;
-var defaultAnswerTimer = 3;
+var questionTimer = 45;
+var answerTimer = 8;
+var defaultQuestionTimer = 45;
+var defaultAnswerTimer = 8;
 var answerChoiceCount = 4;
 var quesCounter;
 var ansCounter;
@@ -83,7 +83,6 @@ var gameOverUnanswered = 0;
 Question Page Functions 
 ========================
 */
-
 function nextPage() {
 	$("#start").one("click", function() {
 		$("#start").unbind("click");
@@ -94,32 +93,26 @@ function nextPage() {
 	});
 }
 function evaluateResponse() {
-	console.log("evaluateResponse executing, line 93")
 	if ((questionDone === false) && (answerChosen === false)) {
-		console.log("conditions met, line 95")
 		$("li").one("click", function(event){
 			event.stopImmediatePropagation();
 			answerChosen = true;
 			clearInterval(quesCounter);
 			clearInterval(ansCounter);
 			userChoice = $(this).html();
-			console.log(this.id)
-			console.log("user chose: " + userChoice);
 			if (userChoice === currentCorrectAns) {
 				answerCorrect = true;
 				gameOverCorrect++;
-				console.log("yes, correct response")
 			} 
 			else {
 				answerCorrect = false;
 				gameOverIncorrect++;
-				console.log("no, wrong response")
 			}
 			userChoice = "";
 			questionTimer = defaultQuestionTimer;
 			questionDone = true;
 			answerPage();
-		})
+		});
 	}
 }
 function questionPageTimer() {
@@ -134,7 +127,7 @@ function questionPageTimer() {
 	 		answerCorrect = "";
 	 		clearInterval(quesCounter);
 	 		answerPage();
- 		};
+ 		}
 	}, 1000);
 }
 
@@ -161,33 +154,31 @@ function answerPage() {
 			$("#answer-eval").html("You ran out of time!");
 			$("#correct-answer-parent").html("The correct answer was: <span id='correct-answer'>"+ currentCorrectAns +"</span>");
 		}
-		console.log("line 152 executed")
 		answerPageTimer();	
 	}
 }
 function changePicture() {
-	$(".background-img").css("background-image", 'url('+ questionBank[currentQuestion].picture) + ")";
-	console.log("picture was changed");
+	$('.background-img').animate({ opacity: 0.1 }, 200,function(){
+		$(".background-img").css("background-image", 'url('+ questionBank[currentQuestion].picture) + ")";
+		$('.background-img').animate({ opacity: 1 }, 600,function(){
+
+        });
+	});
 }
 function answerPageTimer() {
 	clearInterval(ansCounter);
-	console.log("interval was cleared, line 162")
 	$("#aTimer").html(defaultAnswerTimer);
-	console.log("line 167")
 	ansCounter = setInterval(answerDecrement, 1000);
 }
 function answerDecrement() {
-	console.log("answerDecrement, line 168")
 	answerTimer--;
 	$("#aTimer").html(answerTimer);
 	if (answerTimer <= 0) {		 		
- 		console.log("answer page timer done");
  		clearInterval(ansCounter);
  		questionCount++;
  		changeQuestion();
-	};
+	}
 }
-
 function changeQuestion() {
 	if (questionCount <= 8) {
 		clearInterval(ansCounter);
@@ -203,17 +194,12 @@ function changeQuestion() {
 		$("#question-content").toggle();
 		currentQuestion = "q" + questionCount;
 		$("#current-question").html(questionBank[currentQuestion].question);
-		console.log("current question: " + questionBank[currentQuestion].question);
 		currentCorrectAnsInd = questionBank[currentQuestion].answerInd;
 		currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorrectAnsInd];
-		$(".ans-option").prop("disabled", false);
-		var options = $(".ans-option");
-
 		for (i = 0; i < answerChoiceCount; i++) {
 			var ansId = "#a" + (i+1).toString();
 			$(ansId).html(questionBank[currentQuestion].answerChoices[i]);
 		}
-		console.log("changeQuestion is done");
 		questionPageTimer();
 		evaluateResponse();
 	}
@@ -224,14 +210,11 @@ function changeQuestion() {
 		$("#answer-page").toggle();
 		$("#game-over").toggle();
 		gameActive = false;
-		console.log("gameActive is false")
 		gameControl();
 	}
-	
 }
 function restartGame(event) {
 	event.stopImmediatePropagation();
-	console.log("restartGame executed");
 	currentQuestion = "q1";
 	questionCount = 1;
 	answerTimer = defaultAnswerTimer;
@@ -248,20 +231,15 @@ function restartGame(event) {
 	$("#current-question").html(questionBank[currentQuestion].question);
 		currentCorrectAnsInd = questionBank[currentQuestion].answerInd;
 		currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorrectAnsInd];
-		$(".ans-option").prop("disabled", false);
-		var options = $(".ans-option");
-
-		for (i = 0; i < answerChoiceCount; i++) {
-			var ansId = "#a" + (i+1).toString();
-			$(ansId).html(questionBank[currentQuestion].answerChoices[i]);
+		for (j = 0; j < answerChoiceCount; j++) {
+			var ansId = "#a" + (j+1).toString();
+			$(ansId).html(questionBank[currentQuestion].answerChoices[j]);
 		}
 	$("#game-over").toggle();
 	$("#question-content").toggle();
 	questionPageTimer();
 	evaluateResponse();
-	console.log("evaluateResponse executed");
 }
-
 function gameControl() {
 	if (gameActive === true) {
 		nextPage();
@@ -273,7 +251,7 @@ function gameControl() {
 
 $(document).ready(function() {
 	gameControl();
-})
+});
 
 
 
