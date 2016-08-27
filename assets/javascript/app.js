@@ -65,10 +65,10 @@ var currentCorrectAns = questionBank[currentQuestion].answerChoices[currentCorre
 var questionDone = false;
 var answerCorrect = "";
 var userChoice = "";
-var questionTimer = 45;
-var answerTimer = 8;
-var defaultQuestionTimer = 45;
-var defaultAnswerTimer = 8;
+var questionTimer = 30;
+var answerTimer = 5;
+var defaultQuestionTimer = 30;
+var defaultAnswerTimer = 5;
 var answerChoiceCount = 4;
 var quesCounter;
 var ansCounter;
